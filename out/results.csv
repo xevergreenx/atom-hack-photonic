@@ -1,2 +1,4 @@
 name,model,params_M,data,mode,val,minutes,steps,w_ssim,worst,charb,pcc,pcc_min,ssim,ssim_min,latency_ms_mps,latency_ms_cpu
 smoke_m1_digits,m1,1.954,digits,slice,digits,3.0,1290,1.0,0.0,0.0,0.4901,0.3793,0.1151,0.0771,2.78,9.05
+s1_m1,m1,1.954,coco,slice,div2k,15.0,6185,1.0,0.0,0.0,0.2184,0.0229,0.0825,0.0465,2.65,8.22
+s1_m2,m2,2.207,coco,slice,div2k,15.0,4089,1.0,0.0,0.0,0.3014,0.1788,0.1143,0.0667,4.85,15.38
