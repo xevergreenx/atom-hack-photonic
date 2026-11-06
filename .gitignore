@@ -1,0 +1,16 @@
+# Данные: тяжёлые, воспроизводятся скриптами (см. README)
+data/raw/
+data/*.npz
+digits_composite_128_quartets/
+
+# Модели и логи обучения
+checkpoints/
+runs/
+*.pt
+*.pth
+
+# Служебное
+__pycache__/
+*.pyc
+.DS_Store
+.claude/settings.local.json
