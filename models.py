@@ -115,7 +115,32 @@ class M5(M2):
         return phi
 
 
-MODELS = {"m1": M1, "m2": M2, "m5": M5}
+class M9(nn.Module):
+    """M-9: сеть A (фазы ψ_k для каждой плоскости) -> сопряжённый Френель и сумма -> K обычных шагов GS внутри сети.
+    Обучение идёт сквозь шаги GS: сеть учится давать такой старт, из которого K шагов GS дают лучший результат.
+    Дочищающих сетей нет: диагностика M-5 показала, что они ничего не дают (Э6)."""
+
+    def __init__(self, base=24, k=10):
+        super().__init__()
+        self.netA = UNet(4, 8, base)
+        self.w = nn.Parameter(torch.ones(4, 2) * torch.tensor([1.0, 0.0]))
+        self.k = k
+
+    def forward(self, T, fres):
+        o = self.netA(T).view(T.shape[0], 4, 2, *T.shape[-2:])
+        psi = torch.atan2(o[:, :, 1], o[:, :, 0])
+        w = torch.complex(self.w[:, 0], self.w[:, 1])[None, :, None, None]
+        H = (w * fres.adjoint(T * torch.exp(1j * psi))).sum(1)
+        phi = torch.atan2(H.imag, H.real)
+        for _ in range(self.k):
+            F = fres(phi)
+            A = torch.sqrt(F.real ** 2 + F.imag ** 2 + 1e-12)
+            G = fres.adjoint(T * (F / A)).sum(1)                 # GS: амплитуда -> цель, фаза остаётся
+            phi = torch.atan2(G.imag, G.real)
+        return phi
+
+
+MODELS = {"m1": M1, "m2": M2, "m5": M5, "m9": M9, "m9k5": lambda: M9(k=5)}
 
 
 def n_params(m):
