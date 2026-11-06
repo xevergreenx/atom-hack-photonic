@@ -140,7 +140,34 @@ class M9(nn.Module):
         return phi
 
 
-MODELS = {"m1": M1, "m2": M2, "m5": M5, "m9": M9, "m9k5": lambda: M9(k=5)}
+class M10(nn.Module):
+    """M-10: «обученный оптимизатор». Старт — GS x g (без обучения), затем k обученных шагов по метрикам:
+    градиент лосса L-0 по фазе -> нормировка -> маленькая U-Net предлагает поправку -> шаг с выученной длиной.
+    Цель (Э8): за 2–3 шага сделать то, что Adam делает за 10, и поднять SSIM выше плато GS."""
+
+    def __init__(self, k=3, g=20, base=16):
+        super().__init__()
+        self.k, self.g = k, g
+        self.net = UNet(3, 1, base, zero_out=True)              # на старте поправка 0 -> чистый нормированный градиент
+        self.alpha = nn.Parameter(torch.full((k,), 0.15))
+
+    def forward(self, T, fres):
+        from physics import gs, loss_fn
+        with torch.no_grad():
+            phi = gs(T, fres, iters=self.g)
+        for t in range(self.k):
+            with torch.enable_grad():
+                if not phi.requires_grad:
+                    phi = phi.detach().requires_grad_(True)
+                L, _, _ = loss_fn(phi, T, fres)
+                g = torch.autograd.grad(L, phi, create_graph=self.training)[0]
+            gn = g / torch.sqrt((g * g).mean((-2, -1), keepdim=True) + 1e-20)
+            d = self.net(torch.stack([torch.cos(phi), torch.sin(phi), gn], 1))[:, 0]
+            phi = phi - self.alpha[t] * (gn + d)
+        return phi
+
+
+MODELS = {"m1": M1, "m2": M2, "m5": M5, "m9": M9, "m9k5": lambda: M9(k=5), "m10": M10}
 
 
 def n_params(m):
