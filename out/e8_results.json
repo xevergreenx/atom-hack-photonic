@@ -1,0 +1,866 @@
+{
+ "all": [
+  {
+   "init": "superposition",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.2143,
+   "ssim": 0.0905,
+   "pcc_min": 0.078,
+   "ssim_min": 0.0517,
+   "latency_ms": 0.4
+  },
+  {
+   "init": "superposition",
+   "k": 5,
+   "lr": 0.05,
+   "pcc": 0.2488,
+   "ssim": 0.1276,
+   "pcc_min": 0.1365,
+   "ssim_min": 0.0776
+  },
+  {
+   "init": "superposition",
+   "k": 10,
+   "lr": 0.05,
+   "pcc": 0.2732,
+   "ssim": 0.1511,
+   "pcc_min": 0.1813,
+   "ssim_min": 0.0935
+  },
+  {
+   "init": "superposition",
+   "k": 20,
+   "lr": 0.05,
+   "pcc": 0.3039,
+   "ssim": 0.1784,
+   "pcc_min": 0.2369,
+   "ssim_min": 0.1126
+  },
+  {
+   "init": "superposition",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.3456,
+   "ssim": 0.2123,
+   "pcc_min": 0.2854,
+   "ssim_min": 0.1372
+  },
+  {
+   "init": "superposition",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.2704,
+   "ssim": 0.1449,
+   "pcc_min": 0.1793,
+   "ssim_min": 0.0911
+  },
+  {
+   "init": "superposition",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.2985,
+   "ssim": 0.1693,
+   "pcc_min": 0.2328,
+   "ssim_min": 0.1079
+  },
+  {
+   "init": "superposition",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.328,
+   "ssim": 0.191,
+   "pcc_min": 0.2684,
+   "ssim_min": 0.1233
+  },
+  {
+   "init": "superposition",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.3632,
+   "ssim": 0.2176,
+   "pcc_min": 0.299,
+   "ssim_min": 0.1416,
+   "latency_ms": 227.8
+  },
+  {
+   "init": "superposition",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.295,
+   "ssim": 0.1535,
+   "pcc_min": 0.2274,
+   "ssim_min": 0.1004,
+   "latency_ms": 24.2
+  },
+  {
+   "init": "superposition",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3218,
+   "ssim": 0.1721,
+   "pcc_min": 0.2511,
+   "ssim_min": 0.1125,
+   "latency_ms": 46.2
+  },
+  {
+   "init": "superposition",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3487,
+   "ssim": 0.1924,
+   "pcc_min": 0.2779,
+   "ssim_min": 0.1274,
+   "latency_ms": 91.9
+  },
+  {
+   "init": "superposition",
+   "k": 50,
+   "lr": 0.2,
+   "pcc": 0.3773,
+   "ssim": 0.2132,
+   "pcc_min": 0.3021,
+   "ssim_min": 0.1414
+  },
+  {
+   "init": "netA",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.3014,
+   "ssim": 0.1143,
+   "pcc_min": 0.1788,
+   "ssim_min": 0.0667,
+   "latency_ms": 4.7
+  },
+  {
+   "init": "netA",
+   "k": 5,
+   "lr": 0.05,
+   "pcc": 0.3261,
+   "ssim": 0.1473,
+   "pcc_min": 0.2177,
+   "ssim_min": 0.0882
+  },
+  {
+   "init": "netA",
+   "k": 10,
+   "lr": 0.05,
+   "pcc": 0.3423,
+   "ssim": 0.1678,
+   "pcc_min": 0.2466,
+   "ssim_min": 0.102
+  },
+  {
+   "init": "netA",
+   "k": 20,
+   "lr": 0.05,
+   "pcc": 0.3606,
+   "ssim": 0.1917,
+   "pcc_min": 0.2804,
+   "ssim_min": 0.119
+  },
+  {
+   "init": "netA",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.384,
+   "ssim": 0.2201,
+   "pcc_min": 0.3104,
+   "ssim_min": 0.1414
+  },
+  {
+   "init": "netA",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3383,
+   "ssim": 0.161,
+   "pcc_min": 0.2421,
+   "ssim_min": 0.0987
+  },
+  {
+   "init": "netA",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3542,
+   "ssim": 0.1829,
+   "pcc_min": 0.2743,
+   "ssim_min": 0.1145
+  },
+  {
+   "init": "netA",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3704,
+   "ssim": 0.2022,
+   "pcc_min": 0.2966,
+   "ssim_min": 0.1295,
+   "latency_ms": 95.6
+  },
+  {
+   "init": "netA",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.3903,
+   "ssim": 0.2239,
+   "pcc_min": 0.3168,
+   "ssim_min": 0.1456,
+   "latency_ms": 231.9
+  },
+  {
+   "init": "netA",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.3494,
+   "ssim": 0.1682,
+   "pcc_min": 0.267,
+   "ssim_min": 0.1052,
+   "latency_ms": 27.8
+  },
+  {
+   "init": "netA",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3638,
+   "ssim": 0.1862,
+   "pcc_min": 0.2834,
+   "ssim_min": 0.1209,
+   "latency_ms": 50.1
+  },
+  {
+   "init": "netA",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3781,
+   "ssim": 0.2017,
+   "pcc_min": 0.3005,
+   "ssim_min": 0.1325
+  },
+  {
+   "init": "netA",
+   "k": 50,
+   "lr": 0.2,
+   "pcc": 0.3939,
+   "ssim": 0.2191,
+   "pcc_min": 0.3164,
+   "ssim_min": 0.1448
+  },
+  {
+   "init": "gs10",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.3837,
+   "ssim": 0.154,
+   "pcc_min": 0.2452,
+   "ssim_min": 0.0957,
+   "latency_ms": 4.2
+  },
+  {
+   "init": "gs10",
+   "k": 5,
+   "lr": 0.05,
+   "pcc": 0.3847,
+   "ssim": 0.184,
+   "pcc_min": 0.2675,
+   "ssim_min": 0.1159
+  },
+  {
+   "init": "gs10",
+   "k": 10,
+   "lr": 0.05,
+   "pcc": 0.3845,
+   "ssim": 0.1977,
+   "pcc_min": 0.2854,
+   "ssim_min": 0.1263
+  },
+  {
+   "init": "gs10",
+   "k": 20,
+   "lr": 0.05,
+   "pcc": 0.3859,
+   "ssim": 0.2128,
+   "pcc_min": 0.3066,
+   "ssim_min": 0.1377
+  },
+  {
+   "init": "gs10",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.394,
+   "ssim": 0.2288,
+   "pcc_min": 0.3246,
+   "ssim_min": 0.1488,
+   "latency_ms": 229.8
+  },
+  {
+   "init": "gs10",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3794,
+   "ssim": 0.1864,
+   "pcc_min": 0.2818,
+   "ssim_min": 0.1198,
+   "latency_ms": 27.4
+  },
+  {
+   "init": "gs10",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3792,
+   "ssim": 0.2006,
+   "pcc_min": 0.3032,
+   "ssim_min": 0.1311,
+   "latency_ms": 49.7
+  },
+  {
+   "init": "gs10",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3842,
+   "ssim": 0.214,
+   "pcc_min": 0.317,
+   "ssim_min": 0.1404,
+   "latency_ms": 94.9
+  },
+  {
+   "init": "gs10",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.3946,
+   "ssim": 0.2272,
+   "pcc_min": 0.3262,
+   "ssim_min": 0.1488
+  },
+  {
+   "init": "gs10",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.3768,
+   "ssim": 0.1802,
+   "pcc_min": 0.3006,
+   "ssim_min": 0.1204
+  },
+  {
+   "init": "gs10",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3813,
+   "ssim": 0.1941,
+   "pcc_min": 0.3061,
+   "ssim_min": 0.1307
+  },
+  {
+   "init": "gs10",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3861,
+   "ssim": 0.2067,
+   "pcc_min": 0.3126,
+   "ssim_min": 0.1377
+  },
+  {
+   "init": "gs10",
+   "k": 50,
+   "lr": 0.2,
+   "pcc": 0.3952,
+   "ssim": 0.2193,
+   "pcc_min": 0.32,
+   "ssim_min": 0.1458
+  },
+  {
+   "init": "gs20",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.4054,
+   "ssim": 0.1583,
+   "pcc_min": 0.2674,
+   "ssim_min": 0.0977,
+   "latency_ms": 8.3
+  },
+  {
+   "init": "gs20",
+   "k": 5,
+   "lr": 0.05,
+   "pcc": 0.4056,
+   "ssim": 0.1887,
+   "pcc_min": 0.2878,
+   "ssim_min": 0.1194
+  },
+  {
+   "init": "gs20",
+   "k": 10,
+   "lr": 0.05,
+   "pcc": 0.4045,
+   "ssim": 0.2023,
+   "pcc_min": 0.3034,
+   "ssim_min": 0.1297
+  },
+  {
+   "init": "gs20",
+   "k": 20,
+   "lr": 0.05,
+   "pcc": 0.4044,
+   "ssim": 0.2168,
+   "pcc_min": 0.3219,
+   "ssim_min": 0.1411
+  },
+  {
+   "init": "gs20",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.4096,
+   "ssim": 0.232,
+   "pcc_min": 0.3379,
+   "ssim_min": 0.1513,
+   "latency_ms": 234.5
+  },
+  {
+   "init": "gs20",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3995,
+   "ssim": 0.1905,
+   "pcc_min": 0.2989,
+   "ssim_min": 0.1233,
+   "latency_ms": 31.9
+  },
+  {
+   "init": "gs20",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3976,
+   "ssim": 0.2044,
+   "pcc_min": 0.3169,
+   "ssim_min": 0.1341,
+   "latency_ms": 56.0
+  },
+  {
+   "init": "gs20",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3998,
+   "ssim": 0.2169,
+   "pcc_min": 0.3292,
+   "ssim_min": 0.1424,
+   "latency_ms": 99.9
+  },
+  {
+   "init": "gs20",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.4071,
+   "ssim": 0.2295,
+   "pcc_min": 0.3369,
+   "ssim_min": 0.1499
+  },
+  {
+   "init": "gs20",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.3944,
+   "ssim": 0.1826,
+   "pcc_min": 0.3138,
+   "ssim_min": 0.1213
+  },
+  {
+   "init": "gs20",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3966,
+   "ssim": 0.1964,
+   "pcc_min": 0.3221,
+   "ssim_min": 0.1312
+  },
+  {
+   "init": "gs20",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3996,
+   "ssim": 0.2089,
+   "pcc_min": 0.325,
+   "ssim_min": 0.1397
+  },
+  {
+   "init": "gs20",
+   "k": 50,
+   "lr": 0.2,
+   "pcc": 0.4041,
+   "ssim": 0.2216,
+   "pcc_min": 0.3289,
+   "ssim_min": 0.1471
+  },
+  {
+   "init": "netA+gs10",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.4038,
+   "ssim": 0.1598,
+   "pcc_min": 0.2679,
+   "ssim_min": 0.0976,
+   "latency_ms": 8.8
+  },
+  {
+   "init": "netA+gs10",
+   "k": 5,
+   "lr": 0.05,
+   "pcc": 0.4041,
+   "ssim": 0.1881,
+   "pcc_min": 0.2878,
+   "ssim_min": 0.119
+  },
+  {
+   "init": "netA+gs10",
+   "k": 10,
+   "lr": 0.05,
+   "pcc": 0.4032,
+   "ssim": 0.2022,
+   "pcc_min": 0.3039,
+   "ssim_min": 0.1293
+  },
+  {
+   "init": "netA+gs10",
+   "k": 20,
+   "lr": 0.05,
+   "pcc": 0.4036,
+   "ssim": 0.2168,
+   "pcc_min": 0.324,
+   "ssim_min": 0.1408
+  },
+  {
+   "init": "netA+gs10",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.4097,
+   "ssim": 0.2325,
+   "pcc_min": 0.3398,
+   "ssim_min": 0.1511,
+   "latency_ms": 235.6
+  },
+  {
+   "init": "netA+gs10",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3983,
+   "ssim": 0.1908,
+   "pcc_min": 0.2999,
+   "ssim_min": 0.1237,
+   "latency_ms": 31.6
+  },
+  {
+   "init": "netA+gs10",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3968,
+   "ssim": 0.2053,
+   "pcc_min": 0.3191,
+   "ssim_min": 0.1345,
+   "latency_ms": 54.4
+  },
+  {
+   "init": "netA+gs10",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3999,
+   "ssim": 0.2179,
+   "pcc_min": 0.3308,
+   "ssim_min": 0.1433,
+   "latency_ms": 99.1
+  },
+  {
+   "init": "netA+gs10",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.4078,
+   "ssim": 0.2304,
+   "pcc_min": 0.3394,
+   "ssim_min": 0.1505
+  },
+  {
+   "init": "netA+gs10",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.3934,
+   "ssim": 0.1849,
+   "pcc_min": 0.3156,
+   "ssim_min": 0.1233
+  },
+  {
+   "init": "netA+gs10",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3966,
+   "ssim": 0.1992,
+   "pcc_min": 0.3238,
+   "ssim_min": 0.1345
+  },
+  {
+   "init": "netA+gs10",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3997,
+   "ssim": 0.2105,
+   "pcc_min": 0.3271,
+   "ssim_min": 0.1408
+  },
+  {
+   "init": "netA+gs10",
+   "k": 50,
+   "lr": 0.2,
+   "pcc": 0.4051,
+   "ssim": 0.2219,
+   "pcc_min": 0.3318,
+   "ssim_min": 0.1476
+  }
+ ],
+ "best": [
+  {
+   "init": "superposition",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.2143,
+   "ssim": 0.0905,
+   "pcc_min": 0.078,
+   "ssim_min": 0.0517,
+   "latency_ms": 0.4
+  },
+  {
+   "init": "superposition",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.295,
+   "ssim": 0.1535,
+   "pcc_min": 0.2274,
+   "ssim_min": 0.1004,
+   "latency_ms": 24.2
+  },
+  {
+   "init": "superposition",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3218,
+   "ssim": 0.1721,
+   "pcc_min": 0.2511,
+   "ssim_min": 0.1125,
+   "latency_ms": 46.2
+  },
+  {
+   "init": "superposition",
+   "k": 20,
+   "lr": 0.2,
+   "pcc": 0.3487,
+   "ssim": 0.1924,
+   "pcc_min": 0.2779,
+   "ssim_min": 0.1274,
+   "latency_ms": 91.9
+  },
+  {
+   "init": "superposition",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.3632,
+   "ssim": 0.2176,
+   "pcc_min": 0.299,
+   "ssim_min": 0.1416,
+   "latency_ms": 227.8
+  },
+  {
+   "init": "netA",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.3014,
+   "ssim": 0.1143,
+   "pcc_min": 0.1788,
+   "ssim_min": 0.0667,
+   "latency_ms": 4.7
+  },
+  {
+   "init": "netA",
+   "k": 5,
+   "lr": 0.2,
+   "pcc": 0.3494,
+   "ssim": 0.1682,
+   "pcc_min": 0.267,
+   "ssim_min": 0.1052,
+   "latency_ms": 27.8
+  },
+  {
+   "init": "netA",
+   "k": 10,
+   "lr": 0.2,
+   "pcc": 0.3638,
+   "ssim": 0.1862,
+   "pcc_min": 0.2834,
+   "ssim_min": 0.1209,
+   "latency_ms": 50.1
+  },
+  {
+   "init": "netA",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3704,
+   "ssim": 0.2022,
+   "pcc_min": 0.2966,
+   "ssim_min": 0.1295,
+   "latency_ms": 95.6
+  },
+  {
+   "init": "netA",
+   "k": 50,
+   "lr": 0.1,
+   "pcc": 0.3903,
+   "ssim": 0.2239,
+   "pcc_min": 0.3168,
+   "ssim_min": 0.1456,
+   "latency_ms": 231.9
+  },
+  {
+   "init": "gs10",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.3837,
+   "ssim": 0.154,
+   "pcc_min": 0.2452,
+   "ssim_min": 0.0957,
+   "latency_ms": 4.2
+  },
+  {
+   "init": "gs10",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3794,
+   "ssim": 0.1864,
+   "pcc_min": 0.2818,
+   "ssim_min": 0.1198,
+   "latency_ms": 27.4
+  },
+  {
+   "init": "gs10",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3792,
+   "ssim": 0.2006,
+   "pcc_min": 0.3032,
+   "ssim_min": 0.1311,
+   "latency_ms": 49.7
+  },
+  {
+   "init": "gs10",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3842,
+   "ssim": 0.214,
+   "pcc_min": 0.317,
+   "ssim_min": 0.1404,
+   "latency_ms": 94.9
+  },
+  {
+   "init": "gs10",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.394,
+   "ssim": 0.2288,
+   "pcc_min": 0.3246,
+   "ssim_min": 0.1488,
+   "latency_ms": 229.8
+  },
+  {
+   "init": "gs20",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.4054,
+   "ssim": 0.1583,
+   "pcc_min": 0.2674,
+   "ssim_min": 0.0977,
+   "latency_ms": 8.3
+  },
+  {
+   "init": "gs20",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3995,
+   "ssim": 0.1905,
+   "pcc_min": 0.2989,
+   "ssim_min": 0.1233,
+   "latency_ms": 31.9
+  },
+  {
+   "init": "gs20",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3976,
+   "ssim": 0.2044,
+   "pcc_min": 0.3169,
+   "ssim_min": 0.1341,
+   "latency_ms": 56.0
+  },
+  {
+   "init": "gs20",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3998,
+   "ssim": 0.2169,
+   "pcc_min": 0.3292,
+   "ssim_min": 0.1424,
+   "latency_ms": 99.9
+  },
+  {
+   "init": "gs20",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.4096,
+   "ssim": 0.232,
+   "pcc_min": 0.3379,
+   "ssim_min": 0.1513,
+   "latency_ms": 234.5
+  },
+  {
+   "init": "netA+gs10",
+   "k": 0,
+   "lr": 0,
+   "pcc": 0.4038,
+   "ssim": 0.1598,
+   "pcc_min": 0.2679,
+   "ssim_min": 0.0976,
+   "latency_ms": 8.8
+  },
+  {
+   "init": "netA+gs10",
+   "k": 5,
+   "lr": 0.1,
+   "pcc": 0.3983,
+   "ssim": 0.1908,
+   "pcc_min": 0.2999,
+   "ssim_min": 0.1237,
+   "latency_ms": 31.6
+  },
+  {
+   "init": "netA+gs10",
+   "k": 10,
+   "lr": 0.1,
+   "pcc": 0.3968,
+   "ssim": 0.2053,
+   "pcc_min": 0.3191,
+   "ssim_min": 0.1345,
+   "latency_ms": 54.4
+  },
+  {
+   "init": "netA+gs10",
+   "k": 20,
+   "lr": 0.1,
+   "pcc": 0.3999,
+   "ssim": 0.2179,
+   "pcc_min": 0.3308,
+   "ssim_min": 0.1433,
+   "latency_ms": 99.1
+  },
+  {
+   "init": "netA+gs10",
+   "k": 50,
+   "lr": 0.05,
+   "pcc": 0.4097,
+   "ssim": 0.2325,
+   "pcc_min": 0.3398,
+   "ssim_min": 0.1511,
+   "latency_ms": 235.6
+  }
+ ]
+}
