@@ -29,6 +29,14 @@ python3 -I synthesize.py a.png b.png c.png d.png --out result/
 4 восстановления `recon_*.png` и метрики `metrics.json` / `metrics.csv` (КК и SSIM по каждой плоскости, время синтеза).
 Метод: `--method m10p` (по умолчанию, нейросетевой: ядро «GS + веса + связь» ×20 + 3 обученных шага), `m10`, `m2`, `hybrid`, `gs`, `gsplus`.
 
+Флаг `--prefilter` (для `gs`, `gsplus`, `hybrid`): маска считается по целям с поднятыми высокими частотами (фурье-предыскажение, `physics.prefilter`),
+метрики — по исходным картинкам. На свежих независимых фото `gs --prefilter` даёт КК / SSIM 0.547 / 0.390 против 0.518 / 0.338 без него, на срезах сцены эффекта нет
+(подробности — [review_outside_view.md](review_outside_view.md), раздел 5.5).
+
+```bash
+python3 -I synthesize.py --dir папка_с_4_png --method gs --prefilter --out result_gs_pf/
+```
+
 ## Как воспроизвести
 
 ```bash

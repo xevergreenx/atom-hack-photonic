@@ -157,6 +157,28 @@ def loss_fn(phi, T, fres, w_pcc=1.0, w_ssim=1.0, worst=0.0, charb=0.0):
     return loss, p.detach(), s.detach()
 
 
+# ------------------------------------------------------------------ предыскажение целей в базисе Фурье
+# Совет другой команды, проверка — review_outside_view.md, раздел 5.5. Подъём высоких частот целей перед GS:
+# маску считаем по предыскажённым целям, оценку — всегда по исходным.
+PREFILTER_EDGES = (0.0, 0.02, 0.05, 0.1, 0.2, 0.35, 1.0)   # радиальные полосы |f|, циклов на пиксель
+PREFILTER_GAINS = (1.0, 1.25, 1.5, 1.5, 2.0, 1.5)           # перебор на валидации: независимые фото, seed 123
+_PF = {}
+
+
+def prefilter(T, gains=PREFILTER_GAINS, edges=PREFILTER_EDGES):
+    """T' = IFFT(FFT(T) * G(|f|)), отрицательные значения обнуляются, нормировка на max = 1. T (..., N, N)."""
+    key = (str(T.device), tuple(gains), tuple(edges))
+    if key not in _PF:
+        fy = torch.fft.fftfreq(N, device=T.device)
+        r = torch.sqrt(fy[:, None] ** 2 + fy[None, :] ** 2)
+        G = torch.zeros(N, N, device=T.device)
+        for g, a, b in zip(gains, edges[:-1], edges[1:]):
+            G = G + g * ((r >= a) & (r < b)).float()
+        _PF[key] = G
+    Tp = torch.fft.ifft2(torch.fft.fft2(T) * _PF[key]).real.clamp_min(0)
+    return Tp / Tp.amax((-2, -1), keepdim=True).clamp_min(1e-8)
+
+
 # ------------------------------------------------------------------ классические методы (батчевые)
 def superposition(T, fres, gen=None):
     rnd = torch.rand(T.shape, device=T.device, generator=gen)

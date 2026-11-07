@@ -15,9 +15,13 @@
   gs       классический многоплоскостной Герчберг-Сэкстон (--iters, по умолчанию 300)
   gsplus   классика с весами плоскостей и попиксельной обратной связью (Э15)
 
+--prefilter (для gs, gsplus, hybrid): маска считается по целям с поднятыми высокими частотами (фурье-предыскажение,
+  physics.prefilter, review_outside_view.md 5.5); метрики и шаги Adam — по исходным картинкам. Время фильтра входит в замер.
+
 Пример:
   python3 -I synthesize.py a.png b.png c.png d.png --out result/
   python3 -I synthesize.py --dir папка_с_4_png --method gs --iters 300 --out result_gs/
+  python3 -I synthesize.py --dir папка_с_4_png --method gs --prefilter --out result_gs_pf/
 """
 import os, sys, json, csv, time, argparse, glob
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +29,7 @@ sys.path.insert(0, ROOT)
 import numpy as np
 import torch
 from PIL import Image
-from physics import Fresnel, evaluate, quantize_phase, loss_fn, gs, gs_plus, Z, N, pick_device
+from physics import Fresnel, evaluate, quantize_phase, loss_fn, gs, gs_plus, prefilter, Z, N, pick_device
 
 DIST_MM = [z * 1e3 for z in Z]
 
@@ -44,18 +48,25 @@ def load_inputs(paths):
     return T / T.amax((-2, -1), keepdim=True).clamp_min(1e-8)       # нормировка на max = 1, как у жюри
 
 
-def build(method, iters, dev):
+PREFILTER_METHODS = ("gs", "gsplus", "hybrid")
+
+
+def build(method, iters, dev, use_prefilter=False):
+    if use_prefilter and method not in PREFILTER_METHODS:
+        raise SystemExit(f"--prefilter работает только с {', '.join(PREFILTER_METHODS)}: "
+                         f"в {method} шаги по метрикам шли бы к предыскажённым целям, а не к исходным")
+    pf = prefilter if use_prefilter else (lambda T: T)
     if method == "gs":
-        return lambda T, f: gs(T, f, iters=iters)
+        return lambda T, f: gs(pf(T), f, iters=iters)
     if method == "gsplus":
-        return lambda T, f: gs_plus(T, f, iters=iters)
+        return lambda T, f: gs_plus(pf(T), f, iters=iters)
     if method == "hybrid":
         def run(T, f, g=20, k=10, lr=0.1):
             with torch.no_grad():
-                phi = gs(T, f, iters=g)
+                phi = gs(pf(T), f, iters=g)                         # GS — по предыскажённым целям (если --prefilter)
             p = phi.clone().requires_grad_(True)
             opt = torch.optim.Adam([p], lr=lr)
-            for _ in range(k):
+            for _ in range(k):                                         # шаги Adam — всегда по исходным целям
                 opt.zero_grad(); l, _, _ = loss_fn(p, T, f); l.backward(); opt.step()
             return p.detach()
         return run
@@ -85,8 +96,10 @@ def main():
     ap.add_argument("--out", default="result")
     ap.add_argument("--method", default="m10p", choices=["m10p", "m10", "m2", "hybrid", "gs", "gsplus"])
     ap.add_argument("--iters", type=int, default=300, help="итерации для --method gs / gsplus")
+    ap.add_argument("--prefilter", action="store_true", help="фурье-предыскажение целей (gs, gsplus, hybrid)")
     ap.add_argument("--device", default=None)
     args = ap.parse_args()
+    label = args.method + ("+prefilter" if args.prefilter else "")
 
     paths = args.images or sorted(glob.glob(os.path.join(args.dir, "*.png")))
     if len(paths) != 4:
@@ -94,7 +107,7 @@ def main():
     dev = args.device or pick_device()
     f = Fresnel().to(dev)
     T = load_inputs(paths).to(dev)
-    run = build(args.method, args.iters, dev)
+    run = build(args.method, args.iters, dev, args.prefilter)
 
     run(T, f); sync(dev)                                             # прогрев (не входит во время)
     t0 = time.perf_counter(); phi = run(T, f); sync(dev); dt = time.perf_counter() - t0
@@ -109,7 +122,7 @@ def main():
         Image.fromarray((rec[0, j] * 255).round().cpu().numpy().astype(np.uint8), mode="L").save(os.path.join(args.out, name))
         rows.append(dict(plane=j + 1, distance_mm=round(DIST_MM[j], 1), source=os.path.basename(paths[j]), recon=name,
                          pearson=round(p[0, j].item(), 4), ssim=round(s[0, j].item(), 4)))
-    summary = dict(method=args.method, device=dev, synthesis_time_ms=round(dt * 1e3, 2),
+    summary = dict(method=label, device=dev, synthesis_time_ms=round(dt * 1e3, 2),
                    pearson_mean=round(p.mean().item(), 4), ssim_mean=round(s.mean().item(), 4),
                    pearson_min=round(p.min().item(), 4), ssim_min=round(s.min().item(), 4), planes=rows)
     with open(os.path.join(args.out, "metrics.json"), "w") as fo:
@@ -117,7 +130,7 @@ def main():
     with open(os.path.join(args.out, "metrics.csv"), "w", newline="") as fo:
         w = csv.DictWriter(fo, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
 
-    print(f"метод {args.method}, устройство {dev}, время синтеза ДОЭ {dt * 1e3:.1f} мс")
+    print(f"метод {label}, устройство {dev}, время синтеза ДОЭ {dt * 1e3:.1f} мс")
     for r in rows:
         print(f"  плоскость {r['plane']} ({r['distance_mm']} мм): КК {r['pearson']:.3f}  SSIM {r['ssim']:.3f}  <- {r['source']}")
     print(f"  среднее: КК {summary['pearson_mean']:.3f}  SSIM {summary['ssim_mean']:.3f}")
