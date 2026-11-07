@@ -8,10 +8,12 @@
   metrics.json / .csv     КК (Пирсон) и SSIM для каждой пары «исходное — восстановленное», средние, время синтеза
 
 Методы (--method):
-  m10      нейросетевой: GS x20 + 3 обученных шага по метрикам (runs/s1_m10/model.pt)   [по умолчанию]
-  m2       нейросеть за один проход (runs/s1_m2/model.pt)
+  m10p     нейросетевой: ядро «GS + веса + связь» x20 + 3 обученных шага по метрикам, обучен на смеси (runs/f1_m10p_mix)
+  m10      нейросетевой: GS x20 + 3 обученных шага по метрикам, обучен на срезах (runs/s1_m10)   [по умолчанию]
+  m2       нейросеть за один проход (runs/e11_m2_long)
   hybrid   без сети: GS x20 -> 10 шагов Adam по метрикам
   gs       классический многоплоскостной Герчберг-Сэкстон (--iters, по умолчанию 300)
+  gsplus   классика с весами плоскостей и попиксельной обратной связью (Э15)
 
 Пример:
   python3 -I synthesize.py a.png b.png c.png d.png --out result/
@@ -23,7 +25,7 @@ sys.path.insert(0, ROOT)
 import numpy as np
 import torch
 from PIL import Image
-from physics import Fresnel, evaluate, quantize_phase, loss_fn, gs, Z, N, pick_device
+from physics import Fresnel, evaluate, quantize_phase, loss_fn, gs, gs_plus, Z, N, pick_device
 
 DIST_MM = [z * 1e3 for z in Z]
 
@@ -45,6 +47,8 @@ def load_inputs(paths):
 def build(method, iters, dev):
     if method == "gs":
         return lambda T, f: gs(T, f, iters=iters)
+    if method == "gsplus":
+        return lambda T, f: gs_plus(T, f, iters=iters)
     if method == "hybrid":
         def run(T, f, g=20, k=10, lr=0.1):
             with torch.no_grad():
@@ -56,7 +60,7 @@ def build(method, iters, dev):
             return p.detach()
         return run
     from models import MODELS
-    ckpt = {"m10": "s1_m10", "m2": "s1_m2"}[method]
+    ckpt = {"m10": "s1_m10", "m10p": "f1_m10p_mix", "m2": "e11_m2_long"}[method]
     m = MODELS[method]().to(dev)
     m.load_state_dict(torch.load(os.path.join(ROOT, "runs", ckpt, "model.pt"), map_location=dev))
     m.eval()
@@ -79,8 +83,8 @@ def main():
     ap.add_argument("images", nargs="*", help="4 png в порядке расстояний")
     ap.add_argument("--dir", help="папка с 4 png (берутся в алфавитном порядке)")
     ap.add_argument("--out", default="result")
-    ap.add_argument("--method", default="m10", choices=["m10", "m2", "hybrid", "gs"])
-    ap.add_argument("--iters", type=int, default=300, help="итерации для --method gs")
+    ap.add_argument("--method", default="m10", choices=["m10p", "m10", "m2", "hybrid", "gs", "gsplus"])
+    ap.add_argument("--iters", type=int, default=300, help="итерации для --method gs / gsplus")
     ap.add_argument("--device", default=None)
     args = ap.parse_args()
 
