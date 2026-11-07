@@ -100,6 +100,24 @@ def ssim(a, b):
     return m.mean((-2, -1)).reshape(shp[:-2])
 
 
+def ssim_sk(a, b, win=7):
+    """SSIM как skimage.metrics.structural_similarity по умолчанию (data_range=1):
+    равномерное окно 7x7, выборочная ковариация (N/(N-1)), края шириной 3 пикселя отбрасываются.
+    Реализация жюри неизвестна — отчитываемся в обоих вариантах (Р13)."""
+    shp = a.shape
+    a = a.reshape(-1, 1, shp[-2], shp[-1])
+    b = b.reshape(-1, 1, shp[-2], shp[-1])
+    w = torch.ones(1, 1, win, win, device=a.device, dtype=a.dtype) / win ** 2
+    c1, c2 = 0.01 ** 2, 0.03 ** 2
+    cov = win * win / (win * win - 1)
+    mu_a, mu_b = F.conv2d(a, w), F.conv2d(b, w)                 # «valid» = ровно область после обрезки краёв
+    saa = cov * (F.conv2d(a * a, w) - mu_a ** 2)
+    sbb = cov * (F.conv2d(b * b, w) - mu_b ** 2)
+    sab = cov * (F.conv2d(a * b, w) - mu_a * mu_b)
+    m = ((2 * mu_a * mu_b + c1) * (2 * sab + c2)) / ((mu_a ** 2 + mu_b ** 2 + c1) * (saa + sbb + c2))
+    return m.mean((-2, -1)).reshape(shp[:-2])
+
+
 def quantize_phase(phi):
     """8 бит как в ТЗ: 0 -> -pi, 255 -> +pi. Возвращает (коды uint8-значения, квантованную фазу)"""
     w = torch.remainder(phi + torch.pi, 2 * torch.pi)
