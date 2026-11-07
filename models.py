@@ -145,16 +145,16 @@ class M10(nn.Module):
     градиент лосса L-0 по фазе -> нормировка -> маленькая U-Net предлагает поправку -> шаг с выученной длиной.
     Цель (Э8): за 2–3 шага сделать то, что Adam делает за 10, и поднять SSIM выше плато GS."""
 
-    def __init__(self, k=3, g=20, base=16):
+    def __init__(self, k=3, g=20, base=16, core="gs"):
         super().__init__()
-        self.k, self.g = k, g
+        self.k, self.g, self.core = k, g, core
         self.net = UNet(3, 1, base, zero_out=True)              # на старте поправка 0 -> чистый нормированный градиент
         self.alpha = nn.Parameter(torch.full((k,), 0.15))
 
     def forward(self, T, fres):
-        from physics import gs, loss_fn
+        from physics import gs, gs_plus, loss_fn
         with torch.no_grad():
-            phi = gs(T, fres, iters=self.g)
+            phi = gs(T, fres, iters=self.g) if self.core == "gs" else gs_plus(T, fres, iters=self.g)
         for t in range(self.k):
             with torch.enable_grad():
                 if not phi.requires_grad:
@@ -167,7 +167,8 @@ class M10(nn.Module):
         return phi
 
 
-MODELS = {"m1": M1, "m2": M2, "m5": M5, "m9": M9, "m9k5": lambda: M9(k=5), "m10": M10}
+MODELS = {"m1": M1, "m2": M2, "m5": M5, "m9": M9, "m9k5": lambda: M9(k=5), "m10": M10,
+          "m10p": lambda: M10(core="gs_plus")}                 # M-10 на ядре «GS + веса + связь» (Э15)
 
 
 def n_params(m):

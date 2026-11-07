@@ -164,10 +164,34 @@ class LayerDataset(torch.utils.data.Dataset):
         frac = (layers > 1 / 255).float().mean((-2, -1))
         return bool((mx > 0.1).all() and (frac > self.min_frac).all())
 
+    def _objects(self, rng):
+        """«объекты на чёрном фоне»: в каждом слое 1–3 фигуры (эллипсы, повёрнутые прямоугольники),
+        залитые кропом своего фото. Похоже на объекты на разных глубинах, как кольца на слайде 2 ТЗ."""
+        yy, xx = np.mgrid[0:OUT, 0:OUT].astype(np.float32)
+        layers = []
+        for _ in range(N_LAYERS):
+            k = int(rng.integers(0, len(self.img)))
+            im = self._photometric(rng, self._crop(rng, self.img[k], self.depth[k])[0]).numpy()
+            m = np.zeros((OUT, OUT), bool)
+            for _ in range(int(rng.integers(1, 4))):
+                cx, cy = rng.uniform(16, OUT - 16, 2)
+                a, b = rng.uniform(8, 40, 2)
+                t = rng.uniform(0, np.pi)
+                u = (xx - cx) * np.cos(t) + (yy - cy) * np.sin(t)
+                v = -(xx - cx) * np.sin(t) + (yy - cy) * np.cos(t)
+                m |= ((u / a) ** 2 + (v / b) ** 2 < 1) if rng.random() < 0.5 else ((np.abs(u) < a) & (np.abs(v) < b))
+            layers.append(torch.from_numpy(im * m))
+        return torch.stack(layers)
+
     def __getitem__(self, i):
         rng = self._rng(i)
         for _ in range(20):                                           # пересэмплируем пустые/тёмные слои
-            if self.mode == "independent":
+            mode = self.mode
+            if mode == "mix":                                         # Г15: срезы 50% / независимые 30% / объекты 20%
+                mode = rng.choice(["slice", "independent", "objects"], p=[0.5, 0.3, 0.2])
+            if mode == "objects":
+                layers = self._objects(rng)
+            elif mode == "independent":
                 ks = rng.integers(0, len(self.img), N_LAYERS)
                 layers = torch.stack([self._photometric(rng, self._crop(rng, self.img[k], self.depth[k])[0]) for k in ks])
             else:
