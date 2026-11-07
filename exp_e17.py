@@ -27,7 +27,7 @@ def sync():
         torch.mps.synchronize()
 
 
-def timeit(fn, T1, reps=5):
+def timeit(fn, T1, reps=9):
     fn(T1); sync()
     ts = []
     for _ in range(reps):
@@ -68,6 +68,9 @@ def q(fn):
 
 
 T1 = sets["slices"][:1]
+for _ in range(3):                                   # общий прогрев видеокарты перед замерами
+    gs(T1, f, iters=50); gs_plus(T1, f, iters=50); adam_after(gs_plus, 5, 5)(T1)
+sync()
 res = {"curves": {}, "points": {}}
 for cname, core in [("GS", gs), ("GS+", gs_plus)]:
     pts = []

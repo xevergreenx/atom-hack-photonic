@@ -1,0 +1,278 @@
+{
+ "суперпозиция": {
+  "slices": {
+   "pcc": 0.2107,
+   "pcc_min": 0.0636,
+   "ssim": 0.0853,
+   "ssim_sk": 0.0892,
+   "ssim_min": 0.0516
+  },
+  "indep": {
+   "pcc": 0.1582,
+   "pcc_min": 0.0893,
+   "ssim": 0.0735,
+   "ssim_sk": 0.0758,
+   "ssim_min": 0.0615
+  },
+  "realizable": {
+   "pcc": 0.2354,
+   "pcc_min": 0.21,
+   "ssim": 0.1352,
+   "ssim_sk": 0.1411,
+   "ssim_min": 0.1205
+  }
+ },
+ "GS x50": {
+  "slices": {
+   "pcc": 0.4108,
+   "pcc_min": 0.2481,
+   "ssim": 0.1578,
+   "ssim_sk": 0.1636,
+   "ssim_min": 0.1024
+  },
+  "indep": {
+   "pcc": 0.4753,
+   "pcc_min": 0.3445,
+   "ssim": 0.2931,
+   "ssim_sk": 0.3059,
+   "ssim_min": 0.2168
+  },
+  "realizable": {
+   "pcc": 0.6871,
+   "pcc_min": 0.6584,
+   "ssim": 0.5589,
+   "ssim_sk": 0.5727,
+   "ssim_min": 0.5074
+  }
+ },
+ "GS x300": {
+  "slices": {
+   "pcc": 0.4269,
+   "pcc_min": 0.2649,
+   "ssim": 0.1645,
+   "ssim_sk": 0.1706,
+   "ssim_min": 0.1084
+  },
+  "indep": {
+   "pcc": 0.5183,
+   "pcc_min": 0.3784,
+   "ssim": 0.3378,
+   "ssim_sk": 0.3502,
+   "ssim_min": 0.2508
+  },
+  "realizable": {
+   "pcc": 0.7465,
+   "pcc_min": 0.7209,
+   "ssim": 0.6298,
+   "ssim_sk": 0.6431,
+   "ssim_min": 0.5783
+  }
+ },
+ "GS+ x50 (веса + связь)": {
+  "slices": {
+   "pcc": 0.4099,
+   "pcc_min": 0.3211,
+   "ssim": 0.1652,
+   "ssim_sk": 0.171,
+   "ssim_min": 0.1106
+  },
+  "indep": {
+   "pcc": 0.4896,
+   "pcc_min": 0.413,
+   "ssim": 0.3157,
+   "ssim_sk": 0.3274,
+   "ssim_min": 0.2461
+  },
+  "realizable": {
+   "pcc": 0.7027,
+   "pcc_min": 0.6867,
+   "ssim": 0.5806,
+   "ssim_sk": 0.5939,
+   "ssim_min": 0.5437
+  }
+ },
+ "GS+ x300 (веса + связь)": {
+  "slices": {
+   "pcc": 0.4275,
+   "pcc_min": 0.3418,
+   "ssim": 0.1723,
+   "ssim_sk": 0.178,
+   "ssim_min": 0.1155
+  },
+  "indep": {
+   "pcc": 0.5235,
+   "pcc_min": 0.4445,
+   "ssim": 0.3512,
+   "ssim_sk": 0.3618,
+   "ssim_min": 0.275
+  },
+  "realizable": {
+   "pcc": 0.7294,
+   "pcc_min": 0.7172,
+   "ssim": 0.6106,
+   "ssim_sk": 0.6235,
+   "ssim_min": 0.5788
+  }
+ },
+ "гибрид GS x20 -> Adam x10": {
+  "slices": {
+   "pcc": 0.3863,
+   "pcc_min": 0.2905,
+   "ssim": 0.1975,
+   "ssim_sk": 0.2011,
+   "ssim_min": 0.1346
+  },
+  "indep": {
+   "pcc": 0.476,
+   "pcc_min": 0.3819,
+   "ssim": 0.3362,
+   "ssim_sk": 0.3414,
+   "ssim_min": 0.2504
+  },
+  "realizable": {
+   "pcc": 0.6712,
+   "pcc_min": 0.6481,
+   "ssim": 0.5664,
+   "ssim_sk": 0.5711,
+   "ssim_min": 0.5269
+  }
+ },
+ "гибрид GS+ x20 -> Adam x10": {
+  "slices": {
+   "pcc": 0.3873,
+   "pcc_min": 0.3223,
+   "ssim": 0.2012,
+   "ssim_sk": 0.2046,
+   "ssim_min": 0.1344
+  },
+  "indep": {
+   "pcc": 0.4928,
+   "pcc_min": 0.408,
+   "ssim": 0.3538,
+   "ssim_sk": 0.3594,
+   "ssim_min": 0.2669
+  },
+  "realizable": {
+   "pcc": 0.7193,
+   "pcc_min": 0.7031,
+   "ssim": 0.6177,
+   "ssim_sk": 0.623,
+   "ssim_min": 0.576
+  }
+ },
+ "M-2 (один проход, 15 мин)": {
+  "slices": {
+   "pcc": 0.2951,
+   "pcc_min": 0.1591,
+   "ssim": 0.1087,
+   "ssim_sk": 0.1158,
+   "ssim_min": 0.0619
+  },
+  "indep": {
+   "pcc": 0.2138,
+   "pcc_min": 0.1615,
+   "ssim": 0.1159,
+   "ssim_sk": 0.1224,
+   "ssim_min": 0.0896
+  },
+  "realizable": {
+   "pcc": 0.2864,
+   "pcc_min": 0.257,
+   "ssim": 0.1854,
+   "ssim_sk": 0.1952,
+   "ssim_min": 0.1562
+  }
+ },
+ "M-2 (один проход, 60 мин)": {
+  "slices": {
+   "pcc": 0.3113,
+   "pcc_min": 0.1837,
+   "ssim": 0.1142,
+   "ssim_sk": 0.1219,
+   "ssim_min": 0.0653
+  },
+  "indep": {
+   "pcc": 0.2301,
+   "pcc_min": 0.1604,
+   "ssim": 0.1287,
+   "ssim_sk": 0.1358,
+   "ssim_min": 0.0935
+  },
+  "realizable": {
+   "pcc": 0.3001,
+   "pcc_min": 0.2577,
+   "ssim": 0.1916,
+   "ssim_sk": 0.203,
+   "ssim_min": 0.151
+  }
+ },
+ "M-10 (GS x20 + 3 обуч. шага, срезы)": {
+  "slices": {
+   "pcc": 0.3927,
+   "pcc_min": 0.2597,
+   "ssim": 0.181,
+   "ssim_sk": 0.1856,
+   "ssim_min": 0.1236
+  },
+  "indep": {
+   "pcc": 0.4656,
+   "pcc_min": 0.3682,
+   "ssim": 0.3087,
+   "ssim_sk": 0.3148,
+   "ssim_min": 0.2412
+  },
+  "realizable": {
+   "pcc": 0.6568,
+   "pcc_min": 0.6312,
+   "ssim": 0.5234,
+   "ssim_sk": 0.5314,
+   "ssim_min": 0.4589
+  }
+ },
+ "M-10p без обучения": {
+  "slices": {
+   "pcc": 0.3897,
+   "pcc_min": 0.3139,
+   "ssim": 0.1744,
+   "ssim_sk": 0.1781,
+   "ssim_min": 0.112
+  },
+  "indep": {
+   "pcc": 0.4854,
+   "pcc_min": 0.4125,
+   "ssim": 0.2844,
+   "ssim_sk": 0.2834,
+   "ssim_min": 0.2114
+  },
+  "realizable": {
+   "pcc": 0.7088,
+   "pcc_min": 0.6916,
+   "ssim": 0.5229,
+   "ssim_sk": 0.5286,
+   "ssim_min": 0.4035
+  }
+ },
+ "M-10p (GS+ x20 + 3 обуч. шага, смесь)": {
+  "slices": {
+   "pcc": 0.3945,
+   "pcc_min": 0.3189,
+   "ssim": 0.1862,
+   "ssim_sk": 0.1902,
+   "ssim_min": 0.1259
+  },
+  "indep": {
+   "pcc": 0.4886,
+   "pcc_min": 0.4143,
+   "ssim": 0.3311,
+   "ssim_sk": 0.3367,
+   "ssim_min": 0.256
+  },
+  "realizable": {
+   "pcc": 0.7099,
+   "pcc_min": 0.6905,
+   "ssim": 0.5519,
+   "ssim_sk": 0.5581,
+   "ssim_min": 0.4081
+  }
+ }
+}

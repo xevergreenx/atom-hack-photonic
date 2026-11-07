@@ -26,12 +26,19 @@ torch.manual_seed(0)
 f = Fresnel().to(DEV)
 
 
+SEED = int(os.environ.get("E12_SEED", "123"))      # 123 — валидация (по ней делались выборы); другой — свежий отложенный набор (Р14)
+
+
 def make_sets():
-    p_sl = os.path.join(ROOT, "data", "val_div2k.pt")
-    p_in = os.path.join(ROOT, "data", "val_div2k_indep.pt")
-    p_re = os.path.join(ROOT, "data", "val_realizable.pt")
+    tag = "" if SEED == 123 else f"_test{SEED}"
+    p_sl = os.path.join(ROOT, "data", f"val_div2k{tag}.pt")
+    p_in = os.path.join(ROOT, "data", f"val_div2k_indep{tag}.pt")
+    p_re = os.path.join(ROOT, "data", f"val_realizable{tag}.pt")
+    if not os.path.exists(p_sl):
+        ds = LayerDataset(os.path.join(ROOT, "data", "pool_div2k.npz"), length=32, mode="slice", aug=False, seed=SEED)
+        torch.save(torch.stack([ds[i] for i in range(32)]), p_sl)
     if not os.path.exists(p_in):
-        ds = LayerDataset(os.path.join(ROOT, "data", "pool_div2k.npz"), length=32, mode="independent", aug=False, seed=123)
+        ds = LayerDataset(os.path.join(ROOT, "data", "pool_div2k.npz"), length=32, mode="independent", aug=False, seed=SEED)
         torch.save(torch.stack([ds[i] for i in range(32)]), p_in)
     if not os.path.exists(p_re):
         Ti = torch.load(p_in).to(DEV)
