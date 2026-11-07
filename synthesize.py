@@ -8,8 +8,8 @@
   metrics.json / .csv     КК (Пирсон) и SSIM для каждой пары «исходное — восстановленное», средние, время синтеза
 
 Методы (--method):
-  m10p     нейросетевой: ядро «GS + веса + связь» x20 + 3 обученных шага по метрикам, обучен на смеси (runs/f1_m10p_mix)
-  m10      нейросетевой: GS x20 + 3 обученных шага по метрикам, обучен на срезах (runs/s1_m10)   [по умолчанию]
+  m10p     нейросетевой: ядро «GS + веса + связь» x20 + 3 обученных шага по метрикам, обучен на смеси (runs/f1_m10p_mix)   [по умолчанию]
+  m10      нейросетевой: GS x20 + 3 обученных шага по метрикам, обучен на срезах (runs/s1_m10)
   m2       нейросеть за один проход (runs/e11_m2_long)
   hybrid   без сети: GS x20 -> 10 шагов Adam по метрикам
   gs       классический многоплоскостной Герчберг-Сэкстон (--iters, по умолчанию 300)
@@ -83,7 +83,7 @@ def main():
     ap.add_argument("images", nargs="*", help="4 png в порядке расстояний")
     ap.add_argument("--dir", help="папка с 4 png (берутся в алфавитном порядке)")
     ap.add_argument("--out", default="result")
-    ap.add_argument("--method", default="m10", choices=["m10p", "m10", "m2", "hybrid", "gs", "gsplus"])
+    ap.add_argument("--method", default="m10p", choices=["m10p", "m10", "m2", "hybrid", "gs", "gsplus"])
     ap.add_argument("--iters", type=int, default=300, help="итерации для --method gs / gsplus")
     ap.add_argument("--device", default=None)
     args = ap.parse_args()
