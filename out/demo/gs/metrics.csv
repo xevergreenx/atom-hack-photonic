@@ -1,0 +1,5 @@
+plane,distance_mm,source,recon,pearson,ssim
+1,24.1,layer_1.png,recon_1_z24.1mm.png,0.4269,0.1388
+2,25.3,layer_2.png,recon_2_z25.3mm.png,0.3333,0.1677
+3,26.5,layer_3.png,recon_3_z26.5mm.png,0.3547,0.1517
+4,27.7,layer_4.png,recon_4_z27.7mm.png,0.5741,0.0758

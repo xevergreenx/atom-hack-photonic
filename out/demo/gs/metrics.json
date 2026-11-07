@@ -1,0 +1,43 @@
+{
+ "method": "gs",
+ "device": "cpu",
+ "synthesis_time_ms": 894.5,
+ "pearson_mean": 0.4222,
+ "ssim_mean": 0.1335,
+ "pearson_min": 0.3333,
+ "ssim_min": 0.0758,
+ "planes": [
+  {
+   "plane": 1,
+   "distance_mm": 24.1,
+   "source": "layer_1.png",
+   "recon": "recon_1_z24.1mm.png",
+   "pearson": 0.4269,
+   "ssim": 0.1388
+  },
+  {
+   "plane": 2,
+   "distance_mm": 25.3,
+   "source": "layer_2.png",
+   "recon": "recon_2_z25.3mm.png",
+   "pearson": 0.3333,
+   "ssim": 0.1677
+  },
+  {
+   "plane": 3,
+   "distance_mm": 26.5,
+   "source": "layer_3.png",
+   "recon": "recon_3_z26.5mm.png",
+   "pearson": 0.3547,
+   "ssim": 0.1517
+  },
+  {
+   "plane": 4,
+   "distance_mm": 27.7,
+   "source": "layer_4.png",
+   "recon": "recon_4_z27.7mm.png",
+   "pearson": 0.5741,
+   "ssim": 0.0758
+  }
+ ]
+}
