@@ -164,6 +164,29 @@ def superposition(T, fres, gen=None):
     return torch.angle(fres.adjoint(f).sum(1))
 
 
+def gs_plus(T, fres, iters=300, phi0=None, plane_w=True, feedback=True, fb_pow=0.5, fb_clip=(0.3, 3.0), callback=None):
+    """GS с двумя добавками из Э14:
+    plane_w  — вклад плоскости в сумму растёт, если её КК хуже среднего (подтягивает худшую плоскость);
+    feedback — попиксельный вес целевой амплитуды растёт там, где восстановление недобирает яркость (SSIM)."""
+    phi = superposition(T, fres) if phi0 is None else phi0
+    W = torch.ones_like(T)
+    for it in range(1, iters + 1):
+        F = fres(phi)
+        U = F / torch.sqrt(F.real ** 2 + F.imag ** 2 + 1e-12)
+        A = to_image(F)
+        if feedback:
+            W = (W * ((T + 1e-3) / (A + 1e-3)) ** fb_pow).clamp(*fb_clip)
+        Bk = fres.adjoint(T * W * U)
+        if plane_w:
+            w = (1.0 - pcc(A, T)).clamp_min(1e-3)
+            Bk = Bk * (w / w.mean(1, keepdim=True))[..., None, None]
+        G = Bk.sum(1)
+        phi = torch.atan2(G.imag, G.real)
+        if callback is not None:
+            callback(it, phi)
+    return phi
+
+
 def gs(T, fres, iters=300, phi0=None, callback=None):
     """многоплоскостной (параллельный) Герчберг-Сэкстон. callback(it, phi) после каждой итерации."""
     phi = superposition(T, fres) if phi0 is None else phi0
